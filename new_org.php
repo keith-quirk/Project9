@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Manage Organization</title>
+        <title>Add Organization</title>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,33 +11,64 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://unpkg.com/@popperjs/core@2">
         
+        
         <style>
-        body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-        body, html {
-            height: 100%;
-            line-height: 1.8;
-        }
-
-        .w3-bar .w3-button {
-            padding: 16px;
-        }
-
-        .w3-container{
-          margin-top: 50px;
-          padding: 16px;
-        }
-
-        .dropdown{
-          text-align: center;
-        }
-        </style>
+            body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+            body, html {
+                height: 100%;
+                line-height: 1.8;
+            }
+    
+            .w3-bar .w3-button{
+                padding: 16px;
+            }
+    
+            .w3-container{
+              margin-top: 50px;
+              padding: 16px;
+            }
+    
+            *{
+                box-sizing: border-box;
+            }
+    
+            .container{
+                background-color: beige;
+                padding: 5px 28px 15px 20px;
+                border: 1px solid lightgray;
+                border-radius: 4px;
+            }
+    
+            input[type="text"]{
+                width: 50%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin: 10px;
+            }
+    
+            input[type="submit"]{
+                background-color: #ccc;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 50%;
+            }
+    
+            input[type="submit"]:hover{
+                background-color: #FFC300;
+            }
+            
+            </style>
     </head>
     <body>
 
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
-        <a href="#home" class="w3-bar-item w3-button w3-wide">cityZen</a>
+    <a href="manage_org.php" class="w3-bar-item w3-button w3-wide">cityZen</a>
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
         <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i> ABOUT</a>
@@ -59,36 +90,18 @@
         <a href="#account" onclick="w3_close()" class="w3-bar-item w3-button">ACCOUNT</a>
         <a href="#log-out" onclick="w3_close()" class="w3-bar-item w3-button">LOG OUT</a>
     </nav>
-
-    <div class="w3-container" id="manage-org">
-      <h1 class="w3-center">Manage Organizations</h1>
+    <div class="w3-container" id="add-org">
+        <h1 class="w3-center">New Organization</h1>
+        <h4 class="w3-center">Record a New Organization</h4>
     </div>
 
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        Select an Organization
-      </button>
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" onclick="window.location.href='Add_Organization.html'" class="addbtn">
-        Add a New Organization
-      </button>
+      <form class="orgForm" action="org_server.php" method="POST">
+        <div class="w3-center">
+            <label type="text" name="org_id"></p>
+            <p>Name <input type="text" name="name" required></p>
+            <p>Address <textarea name="address" cols="100" rows="8"></textarea></p>
+            <input class="submit" type="submit" value="Submit">
     </div>
-
-    <script>
-      // Toggle between showing and hiding the sidebar when clicking the menu icon
-      var mySidebar = document.getElementById("mySidebar");
-      
-      function w3_open() {
-        if (mySidebar.style.display === 'block') {
-          mySidebar.style.display = 'none';
-        } else {
-          mySidebar.style.display = 'block';
-        }
-      }
-      
-      // Close the sidebar with the close button
-      function w3_close() {
-          mySidebar.style.display = "none";
-      }
-      </script>
-</body>
-</html>
+    </form>
+    </body>
+    </html>
