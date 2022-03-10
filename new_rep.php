@@ -1,3 +1,16 @@
+<?php
+  $conn = mysqli_connect("localhost", "root","");
+  $db = mysqli_select_db($conn, "cityZen");
+
+    $org = '';
+    if(isset($_GET['org'])){
+        $org = mysqli_real_escape_string($conn, $_GET['org']);
+    }
+
+    if($org == ''){
+        header("Location: manage_org.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,43 +28,47 @@
         body, html {
             height: 100%;
             line-height: 1.8;
+            text-align: center;
         }
-        .w3-bar .w3-button{
+
+        .w3-bar .w3-button {
             padding: 16px;
         }
+
         .w3-container{
           margin-top: 50px;
           padding: 16px;
         }
-        *{
-            box-sizing: border-box;
+
+        .dropdown, .addbtn{
+          text-align: center;
         }
-        .container{
-            background-color: beige;
-            padding: 5px 28px 15px 20px;
-            border: 1px solid lightgray;
-            border-radius: 4px;
+
+        input[type="submit"], input[type="text"], input[type="email"]{
+          display:block;
+          margin-left: 380px;
         }
-        input[type="text"]{
-            width: 50%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin: 10px;
-        }
-        input[type="submit"]{
-            background-color: #ccc;
-            color: white;
+
+        input[type="text"], input[type="email"]{
+            color: black;
             padding: 12px 20px;
-            border: none;
             border-radius: 4px;
             cursor: pointer;
             width: 50%;
         }
-        input[type="submit"]:hover{
-            background-color: #FFC300;
+        input[type="submit"]{
+          background-color: #ccc;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          width: 50%;
         }
-        
+
+        input[type="submit"]:hover, .addbtn:hover{
+          background-color: #FFC300;
+        }
         </style>
     </head>
     <body>
@@ -79,14 +96,14 @@
         <a href="#log-out" onclick="w3_close()" class="w3-bar-item w3-button">LOG OUT</a>
     </nav>
     <div class="w3-container" id="add-rep">
-        <h1 class="w3-center">Organization Name</h1>
+        <h1 class="w3-center"><?php echo $org; ?></h1>
         <h4 class="w3-center">Record a New Organization Representative</h4>
     </div>
       <form class="repForm" action="rep_server.php" method="POST">
         <div class="w3-center">
             <p>Username <input type="text" name="username" required></p>
             <p>Full Name <input type="text" name="fullname" required></p>
-            <p>Email <input type="email" name="email" required></p>
+            <p>Email <input type="text" name="email" required></p>
             <p>Mobile Number <input type="text" name="mobileno" required></p>
             <p>Job Title <input type="text" name="jobtitle" required></p>
             <input class="submit-btn" type="submit" value="Submit">
