@@ -1,5 +1,6 @@
 <?php
-$db=mysqli_connect("localhost","root","","cityzen")
+$conn = mysqli_connect("localhost","root","");
+$db = mysqli_select_db($conn, "cityzen");
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,8 +31,27 @@ $db=mysqli_connect("localhost","root","","cityzen")
           padding: 16px;
         }
 
-        .dropdown{
+        .dropdown, .addbtn{
           text-align: center;
+        }
+
+        input[type="submit"]{
+          display:block;
+          margin-left: 380px;
+        }
+
+        input[type="submit"], .addbtn{
+          background-color: #ccc;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          width: 50%;
+        }
+
+        input[type="submit"]:hover, .addbtn:hover{
+          background-color: #FFC300;
         }
         </style>
     </head>
@@ -68,17 +88,19 @@ $db=mysqli_connect("localhost","root","","cityzen")
     </div>
 
     <div class="dropdown">
-      <form name="orgFormdd" action="new_rep.php" method="post">
-      <select>
+      <form name="orgFormdd" action="new_rep.php" method="get">
+      <select name="org">
         <option>Select an existing Organization</option>
         <?php
-        $result=mysqli_query($db,"SELECT * FROM organizations");
+        $query = "SELECT * FROM `organizations`";
+        $result = mysqli_query($conn,$query);
         WHILE($row=mysqli_fetch_array($result)){
           ?>
-          <option><?php echo $row["org_id"]; ?>. <?php echo $row["name"]; ?></option>
+          <option value="<?php echo $row["name"]; ?>"><?php echo $row["org_id"]; ?>. <?php echo $row["name"]; ?></option>
         <?php
         }
         ?>
+      </select>
         
         <input class="submit-btn" type="submit" value="Submit">
       </select>
