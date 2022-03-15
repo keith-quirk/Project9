@@ -1,4 +1,12 @@
+<?php
+session_start();
+
+include "db-connection.php";
+
+?>
+
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +58,7 @@
                     <input type="number" placeholder="Income" name="houseIncome" required>
                 
             
-                    <button type="submit">Register</button>
+                    <button type="submit" name="submit">Register</button>
                     
                 </form>
 
