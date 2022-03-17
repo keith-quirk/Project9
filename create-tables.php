@@ -1,6 +1,5 @@
 <?php
 include 'db-connection.php';
-$conn = OpenCon();
 echo "Connected Successfully";
 
 $servername = "localhost";
@@ -16,9 +15,10 @@ if ($conn->connect_error) {
 }
 
 // sql to create table
-$sql = "CREATE TABLE User (
-  username VARCHAR(30) NOT NULL,
-  password VARCHAR(30) NOT NULL,
+$sql = "CREATE TABLE Representatives (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
   fullname VARCHAR(50) NOT NULL,
   email VARCHAR(30) NOT NULL,
   mobileNo VARCHAR(10) NOT NULL,
@@ -39,31 +39,42 @@ $sql = "CREATE TABLE Applicant (
   organization VARCHAR(30) NOT NULL
   )";
   if ($conn->query($sql) === TRUE) {
-      echo "Table Users created successfully";
+      echo "Table Applicant created successfully";
     } else {
       echo "Error creating table: " . $conn->error;
     }
   
+$sql = "CREATE TABLE Organization (
+  orgID INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(30) NOT NULL,
+  address VARCHAR(50) NOT NULL
+  )";
+  if ($conn->query($sql) === TRUE) {
+    echo "Table Organizations created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
 $sql = "CREATE TABLE Document (
   filename VARCHAR(50) NOT NULL,
   description VARCHAR(100) NOT NULL
   )";
 if ($conn->query($sql) === TRUE) {
-    echo "Table Users created successfully";
+    echo "Table Document created successfully";
   } else {
     echo "Error creating table: " . $conn->error;
   }
 
-$sql = "INSERT INTO User (username, password, fullname, email, mobileNo, jobTitle)
+$sql = "INSERT INTO Representatives (username, password, fullname, email, mobileNo, jobTitle)
 VALUES ('John', 'password', 'John Doe', 'john@email.com', '0123456789', 'Senior')";
 
 if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
+  echo "New user created successfully";
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 
 
-CloseCon($conn);
+
 ?>
