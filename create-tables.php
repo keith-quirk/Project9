@@ -54,6 +54,41 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error;
   }
 
+$sql = "CREATE TABLE Organizations (
+    org_id BIGINT(5) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL
+    )";
+if ($conn->query($sql) === TRUE) {
+    echo "Table Organizations created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
+$sql = "CREATE TABLE Appeals (
+    appeal_id BIGINT(5) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    description VARCHAR(255) NOT NULL
+    )";
+if ($conn->query($sql) === TRUE) {
+    echo "Table Appeals created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
+$sql = "CREATE TABLE Contributions (
+    contribution_id BIGINT(5) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    value INT(20) NOT NULL,
+    received_date timestamp
+    )";
+if ($conn->query($sql) === TRUE) {
+    echo "Table Contributions created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
 $sql = "INSERT INTO User (username, password, fullname, email, mobileNo, jobTitle)
 VALUES ('John', 'password', 'John Doe', 'john@email.com', '0123456789', 'Senior')";
 
