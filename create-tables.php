@@ -22,7 +22,8 @@ $sql = "CREATE TABLE Representatives (
   fullname VARCHAR(50) NOT NULL,
   email VARCHAR(30) NOT NULL,
   mobileNo VARCHAR(10) NOT NULL,
-  jobTitle VARCHAR(30) NOT NULL
+  jobTitle VARCHAR(30) NOT NULL,
+  organization VARCHAR(100) NOT NULL
   )";
 if ($conn->query($sql) === TRUE) {
     echo "Table Users created successfully";
@@ -56,8 +57,11 @@ $sql = "CREATE TABLE Organization (
   }
 
 $sql = "CREATE TABLE Document (
+  id INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  fullname VARCHAR(30),
   filename VARCHAR(50) NOT NULL,
-  description VARCHAR(100) NOT NULL
+  description VARCHAR(100) NOT NULL,
+  image VARCHAR(255) NOT NULL
   )";
 if ($conn->query($sql) === TRUE) {
     echo "Table Document created successfully";
@@ -65,8 +69,8 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error;
   }
 
-$sql = "INSERT INTO Representatives (username, password, fullname, email, mobileNo, jobTitle)
-VALUES ('John', 'password', 'John Doe', 'john@email.com', '0123456789', 'Senior')";
+$sql = "INSERT INTO Representatives (username, password, fullname, email, mobileNo, jobTitle, organization)
+VALUES ('John', 'password', 'John Doe', 'john@email.com', '0123456789', 'Senior', 'Mercy')";
 
 if ($conn->query($sql) === TRUE) {
   echo "New user created successfully";
