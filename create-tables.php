@@ -1,18 +1,5 @@
 <?php
 include 'db-connection.php';
-echo "Connected Successfully";
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cityzen";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
 
 // sql to create table
 $sql = "CREATE TABLE Representatives (
@@ -57,18 +44,6 @@ $sql = "CREATE TABLE Users(
     echo "Error creating table: " . $conn->error;
   }
 
-
-$sql = "CREATE TABLE Organization (
-  orgID INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30) NOT NULL,
-  address VARCHAR(50) NOT NULL
-  )";
-  if ($conn->query($sql) === TRUE) {
-    echo "Table Organizations created successfully";
-  } else {
-    echo "Error creating table: " . $conn->error;
-  }
-
 $sql = "CREATE TABLE Document (
   id INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   fullname VARCHAR(30),
@@ -82,8 +57,44 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error;
   }
 
-$sql = "INSERT INTO Representatives (username, password, fullname, email, mobileNo, jobTitle, organization)
-VALUES ('John', 'password', 'John Doe', 'john@email.com', '0123456789', 'Senior', 'Mercy')";
+$sql = "CREATE TABLE Organizations (
+    org_id BIGINT(5) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL
+    )";
+if ($conn->query($sql) === TRUE) {
+    echo "Table Organizations created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
+$sql = "CREATE TABLE Appeals (
+    appeal_id BIGINT(5) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    organization VARCHAR(255) NOT NULL
+    )";
+if ($conn->query($sql) === TRUE) {
+    echo "Table Appeals created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
+$sql = "CREATE TABLE Contributions (
+    contribution_id BIGINT(5) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    value INT(20) NOT NULL,
+    received_date timestamp
+    )";
+if ($conn->query($sql) === TRUE) {
+    echo "Table Contributions created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
+$sql = "INSERT INTO User (username, password, fullname, email, mobileNo, jobTitle)
+VALUES ('John', 'password', 'John Doe', 'john@email.com', '0123456789', 'Senior')";
 
 if ($conn->query($sql) === TRUE) {
   echo "New user created successfully";
