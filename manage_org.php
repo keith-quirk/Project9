@@ -1,12 +1,11 @@
 <?php
-$conn = mysqli_connect("localhost","root","");
-$db = mysqli_select_db($conn, "cityzen");
+session_start();
+include 'db-connection.php';
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Manage Organization</title>
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="stylesheet" href="style.css"> -->
@@ -14,6 +13,7 @@ $db = mysqli_select_db($conn, "cityzen");
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://unpkg.com/@popperjs/core@2">
+        
         
         <style>
         body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
@@ -56,25 +56,22 @@ $db = mysqli_select_db($conn, "cityzen");
         </style>
     </head>
     <body>
-
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
-        <a href="manage_org.php" class="w3-bar-item w3-button w3-wide">cityZen</a>
+    <a href="manage_org.php" class="w3-bar-item w3-button w3-wide">cityZen</a>
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
         <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i> ABOUT</a>
         <a href="#manage-organization" class="w3-bar-item w3-button"><i class="fa fa-th"></i> MANAGE ORGANIZATION</a>
         <a href="#log-out" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> LOG OUT</a>
         </div>
-
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
         <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
         <i class="fa fa-bars"></i>
         </a>
     </div>
     </div>
-
     <!-- Sidebar on small screens when clicking the menu icon -->
     <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
@@ -101,14 +98,13 @@ $db = mysqli_select_db($conn, "cityzen");
         }
         ?>
       </select>
+
         
         <input class="submit-btn" type="submit" value="Submit">
       </select>
       <br>
-      <br>
-      <br>
         <!--make dynamic dropdown list-->
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" onclick="window.location.href='new_org.php'" class="addbtn">
+      <button type="button" onclick="window.location.href='new_org.php'" class="addbtn">
         Add a New Organization
       </button>
     </div>
