@@ -26,7 +26,7 @@ $sql = "CREATE TABLE Representatives (
   organization VARCHAR(100) NOT NULL
   )";
 if ($conn->query($sql) === TRUE) {
-    echo "Table Users created successfully";
+    echo "Table Representatives created successfully";
   } else {
     echo "Error creating table: " . $conn->error;
   }
@@ -45,6 +45,19 @@ $sql = "CREATE TABLE Applicant (
       echo "Error creating table: " . $conn->error;
     }
   
+
+$sql = "CREATE TABLE Users(
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  fullname VARCHAR(50) NOT NULL,
+  userType VARCHAR(30) NOT NULL
+  )";
+  if ($conn->query($sql) === TRUE) {
+    echo "Table Users created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
+
 $sql = "CREATE TABLE Organization (
   orgID INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
@@ -78,7 +91,12 @@ if ($conn->query($sql) === TRUE) {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-
-
+$sql = "INSERT INTO Users (fullname, userType)
+VALUES ('John', 'Representative')";
+if ($conn->query($sql) === TRUE) {
+  echo "New user created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
 
 ?>
