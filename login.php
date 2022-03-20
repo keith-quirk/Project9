@@ -1,11 +1,6 @@
 <?php
 include "db-connection.php";
-session_start();
 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: register-for-repr.php");
-    exit;
-}
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form 
@@ -26,13 +21,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
                                 
             $_SESSION["loggedin"] = true;
-            $_SESSION['id'] = $row['id'];
-            $_SESSION['username'] = $row['username'];
             $_SESSION['organization'] = $row['organization'];
-            header("location: rep-home.php");
+            header("Location: rep-home.php");
         }else {
-            $error = "Your Login Name or Password is invalid";
-            }
-        }
+            echo "<script type='text/javascript'>alert(Your Login Name or Password is invalid); window.location.href = 'login-page.php';</script>";
+      }
     }
+}
 ?>

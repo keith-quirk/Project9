@@ -37,10 +37,15 @@ include "db-connection.php";
                     <label for="organization"><b>Organization:</b></label>
                 
                     <select name="organization">
-                        <option value="Org1">Org1</option>
-                        <option value="Org2">Org2</option>
-                        <option value="Org3">Org3</option>
-                        <option value="Org4">Org4</option>
+                    <?php
+                        $query = "SELECT name FROM organizations";
+                        $result = mysqli_query($conn,$query);
+                        WHILE($row=mysqli_fetch_array($result)){
+                        ?>
+                        <option value="<?php echo $row["name"]; ?>"><?php echo $row["org_id"]; ?>. <?php echo $row["name"]; ?></option>
+                        <?php
+                        }
+                    ?>
                     </select>
                     
                     
