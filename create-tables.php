@@ -34,9 +34,11 @@ $sql = "CREATE TABLE Applicant (
   
 
 $sql = "CREATE TABLE Users(
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  fullname VARCHAR(50) NOT NULL,
-  userType VARCHAR(30) NOT NULL
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
+  userType VARCHAR(30) NOT NULL,
+  organization VARCHAR(50)
   )";
   if ($conn->query($sql) === TRUE) {
     echo "Table Users created successfully";
@@ -112,8 +114,10 @@ if ($conn->query($sql) === TRUE) {
 
 
 
-$sql = "INSERT INTO Users (fullname, userType)
-VALUES ('John', 'Representative')";
+$sql = "INSERT INTO Users (username, password, userType, organization)
+VALUES 
+('John', 'password', 'Representative', 'Mercy'),
+('Doe', 'password', 'Representative', 'UNICEF')";
 if ($conn->query($sql) === TRUE) {
   echo "New user created successfully";
 } else {
@@ -121,27 +125,13 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $sql = "INSERT INTO Representatives (username, password, fullname, email, mobileNo, jobTitle, organization)
-VALUES ('John', 'password', 'John Doe', 'email', '1234', 'Senior', 'Mercy')";
+VALUES 
+('John', 'password', 'John Doe', 'email', '1234', 'Senior', 'Mercy'),
+('Doe', 'password', 'Jane Doe', 'email', '1234', 'Senior', 'UNICEF')";
 if ($conn->query($sql) === TRUE) {
   echo "New user created successfully";
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-
-$sql = "INSERT INTO Users (fullname, userType)
-VALUES ('Doe', 'Representative')";
-if ($conn->query($sql) === TRUE) {
-  echo "New user created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$sql = "INSERT INTO Representatives (username, password, fullname, email, mobileNo, jobTitle, organization)
-VALUES ('Doe', 'password', 'Jane Doe', 'email', '1234', 'Senior', 'UNICEF')";
-if ($conn->query($sql) === TRUE) {
-  echo "New user created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
 ?>

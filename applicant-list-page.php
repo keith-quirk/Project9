@@ -114,7 +114,7 @@ include 'db-connection.php';
         <a href="rep-home.php" class="w3-bar-item w3-button w3-wide">cityZen</a>
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
-        <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i>ABOUT</a>
+        <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i> ABOUT</a>
         <a href="logout.php" class="w3-bar-item w3-button">LOG OUT</a>
         </div>
 

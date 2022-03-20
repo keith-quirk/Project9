@@ -102,6 +102,41 @@ include "db-connection.php";
             -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
             }
 
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                }
+
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+                }
+
                   
         </style>
     </head>
@@ -114,7 +149,7 @@ include "db-connection.php";
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
         <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i> ABOUT</a>
-        <a href="logout.php" class="w3-bar-item w3-button">LOG OUT</a>
+        <a href="login-page.php" class="w3-bar-item w3-button">LOG IN</a>
         </div>
 
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -127,16 +162,14 @@ include "db-connection.php";
     <!-- Sidebar on small screens when clicking the menu icon -->
     <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-        <a href="#manage_org.php" onclick="w3_close()" class="w3-bar-item w3-button">ORGANIZE AID APPEAL </a>
-        <a href="#account" onclick="w3_close()" class="w3-bar-item w3-button">REGISTER APPLICANT</a>
-        <a href="#log-out" onclick="w3_close()" class="w3-bar-item w3-button">RECORD</a>
-        <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">LOG OUT</a>
+        <a href="#manage_org.php" onclick="w3_close()" class="w3-bar-item w3-button"> ABOUT</a>
+        <a href="login-page.php" onclick="w3_close()" class="w3-bar-item w3-button">LOG IN</a>
     </nav>
 
 <br><br><br>
 <div class="w3-container">
     <h2>LIST OF APPEALS</h2>
-    <table style="align:center; border:1px; width:100%; height:40px;">
+<table style="align:center; border:1px; width:100%; height:40px;">
     <thead>
         <tr>
             <th style="width: 5px;text-align:center;">ID</th>
@@ -168,11 +201,5 @@ include "db-connection.php";
             ?>
             </tbody>
     </table>
-
-    <form action="record-aid.php" method="POST" >
-    <input type="text" name="id" placeholder="Enter appeal ID" required></input>
-    <button class="submitbtn" type="submit" name="btn">Submit</button>
-    </form>
         </div>
-    </body>
-  </html>
+        </html>

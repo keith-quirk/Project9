@@ -6,16 +6,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form 
     
     $username = $_POST['username'];
-    $password = $_POST['password']; 
-    
-    $sql = "SELECT * FROM Representatives WHERE username = '$username' and password = '$password'";
+    $password = $_POST['password'];
+    $username = stripcslashes($username);  
+    $password = stripcslashes($password);  
+    $username = mysqli_real_escape_string($conn, $username);  
+    $password = mysqli_real_escape_string($conn, $password);  
+
+    $sql = "SELECT * FROM Users WHERE username = '$username' and password = '$password'";
     $result = mysqli_query($conn,$sql);
-    $count = mysqli_num_rows($result);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
+    $count = mysqli_num_rows($result);  
     
     // If result matched $myusername and $mypassword, table row must be 1 row
     
-    if($count == 1) {
-        $row = mysqli_fetch_assoc($result);
+    if($count > 0) {
 
         if ($row['username'] === $username && $row['password'] === $password) {
             session_start();

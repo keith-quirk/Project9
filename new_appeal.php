@@ -87,7 +87,7 @@ include 'db-connection.php';
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
         <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i> ABOUT</a>
-        <a href="#log-out" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> LOG OUT</a>
+        <a href="logout.php" class="w3-bar-item w3-button"></i> LOG OUT</a>
         </div>
 
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
