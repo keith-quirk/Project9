@@ -22,6 +22,24 @@ include 'db-connection.php';
                 background-color: #eeeeee;
             }
 
+            .w3-bar .w3-button {
+                padding: 16px;
+            }
+
+            .w3-container{
+                font-family: 'Open Sans Condensed', arial, sans;
+                width: 80%;
+                padding: 30px;
+                background: #FFFFFF;
+                margin: 50px auto;
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+                -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+                -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+            }
+
+            .dropdown, .addbtn{
+                text-align: center;
+                }
             .container { 
                 width:90%;
                 height: 500px;
@@ -144,7 +162,7 @@ include 'db-connection.php';
                 <a href="logout.php" class="w3-bar-item w3-button">LOG OUT</a>
             </nav>
 
-<br><br>
+<br><br><br>
 <center>
             <h2>WHAT WOULD YOU LIKE TO DO?</h2>
             
