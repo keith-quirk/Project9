@@ -107,14 +107,12 @@ include 'db-connection.php';
                     <hr>
                     
                     <label><b>Don't have an account yet?</b></label>
-                    <a class="pad" href="signup.php">Sign up</a>
+                    <a class="pad" href="register-for-applicant.php">Sign up</a>
                     <a class="pad" href="view-appeals-page.php">Cancel</a>
                 </form>
             </div>
             <br><br>
             
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
         </body>
 
     </main>
