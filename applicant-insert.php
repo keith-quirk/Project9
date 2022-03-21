@@ -1,28 +1,24 @@
 <?php
-include_once "db-connection.php";
-$conn = OpenCon();
-
-echo "Connected successfully";
-
-if(isset($_POST['submit'])){
-	$fullname = $_REQUEST['fullname'];
-	$idNo = $_REQUEST['idNo'];
-	$address = $_REQUEST['address'];
-	$houseIncome = $_REQUEST['houseIncome'];
-	$organization = $_REQUEST['organization'];
+session_start();
+include 'db-connection.php';
 
 
-	$sql = "INSERT INTO Applicant (fullname, idNo, address, houseIncome, organization)
-	VALUES ('$fullname','$idNo','$address','$houseIncome','organization')";
+$fullname = $_POST['fullName'];
+$idNo = $_POST['idNo'];
+$address = $_POST['hsAddress'];
+$houseIncome = $_POST['houseIncome'];
+$organization = $_SESSION['organization'];
+$_SESSION["fullname"] = $fullname;
+$sql = "INSERT INTO Applicant (fullname, idNo, address, houseIncome, organization)
+VALUES ('$fullname','$idNo','$address','$houseIncome','$organization')";
 
-	if(mysqli_query($conn, $sql)){
-		echo "<h3>data stored in a database successfully.";
-	} else{
-		echo "ERROR: $sql. "
-			. mysqli_error($conn);
-	}
+if ($conn->query($sql) === TRUE) {
+	echo "Document uploaded"; 
+    echo "<script type='text/javascript'>alert('Successful - Record Updated!'); window.location.href = 'file-sub-page.php';</script>";   
+    }
+	else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
 
-	CloseCon($conn);
-}
 ?>
 

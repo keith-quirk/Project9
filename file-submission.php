@@ -1,35 +1,28 @@
 <?php
+session_start();
 include 'db-connection.php';
-$statusMsg = '';
+$fullname = $_SESSION["fullname"];
+$file = $_FILES["file"]["name"];
+$filetype = $_FILES["file"]["type"];
+$filesize = $_FILES["file"]["size"];
+$tempfile = $_FILES["file"]["tmp_name"];
+$dir = "uploads/".$file;
 
-$targetDir = "uploads/";
-$fileName = basename($_FILES["file"]["name"]);
-$targetFilePath = $targetDir . $fileName;
-$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+$filename = $_POST["filename"];
+$description = $_POST["description"];
 
-if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
-    // Allow certain file formats
-    $allowTypes = array('jpg','png','jpeg','pdf', 'docx');
-    if(in_array($fileType, $allowTypes)){
-        // Upload file to server
-        if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-            // Insert image file name into database
-            $insert = $db->query("INSERT into images (file_name, uploaded_on) VALUES ('".$fileName."', NOW())");
-            if($insert){
-                $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
-            }else{
-                $statusMsg = "File upload failed, please try again.";
-            } 
-        }else{
-            $statusMsg = "Sorry, there was an error uploading your file.";
-        }
-    }else{
-        $statusMsg = 'Sorry, only JPG, JPEG, PNG , docx, & PDF files are allowed to upload.';
+
+if(move_uploaded_file($tempfile, $dir)){
+    $sql = "INSERT INTO Document(fullname, filename, description, image)
+    VALUES ('$fullname','$filename', '$description', '".$file."')";
+    if ($conn->query($sql) === TRUE) {
+    echo "Document uploaded";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-}else{
-    $statusMsg = 'Please select a file to upload.';
-}
-
-// Display status message
-echo $statusMsg;
+    echo "<script type='text/javascript'>alert('Successful - Record Updated!'); window.location.href = 'file-sub-page.php';</script>";   
+    }
+    else{
+        echo "<script type='text/javascript'>alert('Unsuccessful - ERROR!'); window.location.href = 'file-sub-page.php';</script>";
+    }
 ?>

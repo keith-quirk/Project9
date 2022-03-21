@@ -1,31 +1,19 @@
 <?php
 include 'db-connection.php';
-$conn = OpenCon();
-echo "Connected Successfully";
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cityzen";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
 
 // sql to create table
-$sql = "CREATE TABLE User (
-  username VARCHAR(30) NOT NULL,
-  password VARCHAR(30) NOT NULL,
+$sql = "CREATE TABLE Representatives (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
   fullname VARCHAR(50) NOT NULL,
   email VARCHAR(30) NOT NULL,
   mobileNo VARCHAR(10) NOT NULL,
-  jobTitle VARCHAR(30) NOT NULL
+  jobTitle VARCHAR(30) NOT NULL,
+  organization VARCHAR(100) NOT NULL
   )";
 if ($conn->query($sql) === TRUE) {
-    echo "Table Users created successfully";
+    echo "Table Representatives created successfully";
   } else {
     echo "Error creating table: " . $conn->error;
   }
@@ -39,23 +27,40 @@ $sql = "CREATE TABLE Applicant (
   organization VARCHAR(30) NOT NULL
   )";
   if ($conn->query($sql) === TRUE) {
-      echo "Table Users created successfully";
+      echo "Table Applicant created successfully";
     } else {
       echo "Error creating table: " . $conn->error;
     }
   
-$sql = "CREATE TABLE Document (
-  filename VARCHAR(50) NOT NULL,
-  description VARCHAR(100) NOT NULL
+
+$sql = "CREATE TABLE Users(
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
+  userType VARCHAR(30) NOT NULL,
+  organization VARCHAR(50)
   )";
-if ($conn->query($sql) === TRUE) {
+  if ($conn->query($sql) === TRUE) {
     echo "Table Users created successfully";
   } else {
     echo "Error creating table: " . $conn->error;
   }
 
+$sql = "CREATE TABLE Document (
+  id INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  fullname VARCHAR(30),
+  filename VARCHAR(50) NOT NULL,
+  description VARCHAR(100) NOT NULL,
+  image VARCHAR(255) NOT NULL
+  )";
+if ($conn->query($sql) === TRUE) {
+    echo "Table Document created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
 $sql = "CREATE TABLE Organizations (
-    org_id BIGINT(5) NOT NULL,
+    org_id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL
     )";
@@ -65,11 +70,14 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error;
   }
 
+
 $sql = "CREATE TABLE Appeals (
-    appeal_id BIGINT(5) NOT NULL,
+    appeal_id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
-    description VARCHAR(255) NOT NULL
+    description VARCHAR(255) NOT NULL,
+    organization VARCHAR(255) NOT NULL,
+    status VARCHAR(20) NOT NULL
     )";
 if ($conn->query($sql) === TRUE) {
     echo "Table Appeals created successfully";
@@ -78,7 +86,7 @@ if ($conn->query($sql) === TRUE) {
   }
 
 $sql = "CREATE TABLE Contributions (
-    contribution_id BIGINT(5) NOT NULL,
+    contribution_id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     description VARCHAR(255) NOT NULL,
     value INT(20) NOT NULL,
     received_date timestamp
@@ -89,16 +97,41 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error;
   }
 
-$sql = "INSERT INTO User (username, password, fullname, email, mobileNo, jobTitle)
-VALUES ('John', 'password', 'John Doe', 'john@email.com', '0123456789', 'Senior')";
-
+$sql = "CREATE TABLE Disbursement(
+  id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  fullname VARCHAR(50) NOT NULL,
+  date DATE NOT NULL,
+  cash INT(100) NOT NULL,
+  goods VARCHAR(255) NOT NULL
+  )";
 if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
+  echo "Table Disbursement created successfully";
 } else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+  echo "Error creating table: " . $conn->error;
 }
 
 
 
-CloseCon($conn);
+
+
+$sql = "INSERT INTO Users (username, password, userType, organization)
+VALUES 
+('John', 'password', 'Representative', 'Mercy'),
+('Doe', 'password', 'Representative', 'UNICEF')";
+if ($conn->query($sql) === TRUE) {
+  echo "New user created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$sql = "INSERT INTO Representatives (username, password, fullname, email, mobileNo, jobTitle, organization)
+VALUES 
+('John', 'password', 'John Doe', 'email', '1234', 'Senior', 'Mercy'),
+('Doe', 'password', 'Jane Doe', 'email', '1234', 'Senior', 'UNICEF')";
+if ($conn->query($sql) === TRUE) {
+  echo "New user created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
 ?>

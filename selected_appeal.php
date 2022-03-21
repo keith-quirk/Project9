@@ -100,7 +100,7 @@
     <form class="s_appealForm" action="s_appeal_server.php" method="POST">
         <div class="w3-center">
         <?php
-        $query = "SELECT * FROM `appeals`";
+        $query = "SELECT * FROM Appeals";
         $result = mysqli_query($conn,$query);
         WHILE($row=mysqli_fetch_array($result)){
           ?>

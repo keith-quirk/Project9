@@ -1,27 +1,16 @@
 <?php
-
-$db = mysqli_connect("localhost", "root", "", "cityzen");
-
-if(!$db){
-    die("ERROR: Could not connect" . mysqli_connect_error());
+include 'db-connection.php';
+if(isset($_POST['submit'])){
+    $name = $_POST['name'];
+    $address = $_POST['address'];
+     $sql = "INSERT INTO Organizations (name, address)
+     VALUES ('$name', '$address')";
+     if (mysqli_query($conn, $sql)) {
+        echo "New record has been added successfully !";
+     } else {
+        echo "Error: " . $sql . ":-" . mysqli_error($conn);
+     }
+     mysqli_close($conn);
 }
-
-$org_id = $_POST['org_id'];
-$name = $_POST['name'];
-$address = $_POST['address'];
-
-$insert = "INSERT INTO organizations VALUES ('$org_id', '$name', '$address')";
-
-if(mysqli_query($db, $insert)){
-    echo "Success";
-} else{
-    echo $db->error;
-}
-
-mysqli_close($db);
 header("location: new_org.php");
-
-//add alert dialog to inform user that rep is added
-
-
 ?>

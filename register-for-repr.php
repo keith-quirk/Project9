@@ -1,50 +1,167 @@
 <?php
 session_start();
-$organization = $_SESSION['organization'];
 include 'db-connection.php';
-
 
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         
-        <link rel="stylesheet" href="project.css">
-   
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/@popperjs/core@2">
+
+        <style>
+            .w3-bar .w3-button {
+                padding: 16px;
+            }
+
+            .w3-container{
+                font-family: 'Open Sans Condensed', arial, sans;
+                width: 50%;
+                padding: 30px;
+                background: #FFFFFF;
+                margin: 50px auto;
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+                -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+                -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+            }
+
+            .dropdown, .addbtn{
+                text-align: center;
+                }
+
+            input[type=text], input[type=number] {
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                outline: none;
+                display: block;
+                width: 100%;
+                padding: 7px;
+                border: none;
+                border: 2px solid #ddd;
+                margin-bottom: 10px;
+                font: 16px Arial, Helvetica, sans-serif;
+                height: 45px;
+            }
+
+            input[type=text]:focus, input[type=number]:focus{
+                border: 2px solid #b4b4d8;
+            }
+
+            body {
+                font-family: 'Open Sans Condensed', sans-serif;
+                font-size: 20px;
+                background-color: #eeeeee;
+            }
+
+            .regbutton{
+                -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+                -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+                box-shadow: inset 0px 1px 0px 0px #45D6D6;
+                background-color: #2CBBBB;
+                border: 1px solid #27A0A0;
+                display: inline-block;
+                cursor: pointer;
+                color: #FFFFFF;
+                font-family: 'Open Sans Condensed', sans-serif;
+                font-size: 14px;
+                padding: 8px 18px;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+
+            .regbutton:hover{
+                background-color: #34CACA;
+            }
+
+            h2 {
+                background: #4D4D4D;
+                text-transform: uppercase;
+                font-family: 'Open Sans Condensed', sans-serif;
+                color: white;
+                font-size: 18px;
+                font-weight: 100;
+                padding: 20px;
+                margin: -30px -30px 30px -30px;
+            }
+
+            a{
+                text-decoration: none;
+            }
+        </style>
     </head>
 
-    <main>
     <body>
-        <div class="header">
-        <h1>Registration form</h1>
+    
+        <div class="w3-top">
+        <div class="w3-bar w3-white w3-card" id="myNavbar">
+            <a href="rep-home.php" class="w3-bar-item w3-button w3-wide">cityZen</a>
+            <!-- Right-sided navbar links -->
+            <div class="w3-right w3-hide-small">
+            <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i> ABOUT</a>
+            <a href="logout.php" class="w3-bar-item w3-button">LOG OUT</a>
+            </div>
+
+            <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+            <i class="fa fa-bars"></i>
+            </a>
+        </div>
         </div>
 
-        <form class="regForm" action="applicant-insert.php" method="post">
+        <!-- Sidebar on small screens when clicking the menu icon -->
+        <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+            <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+            <a href="#manage-organization" onclick="w3_close()" class="w3-bar-item w3-button">MANAGE ORGANIZATION</a>
+            <a href="#account" onclick="w3_close()" class="w3-bar-item w3-button">ACCOUNT</a>
+            <a href="logout.php" class="w3-bar-item w3-button">LOG OUT</a>
+        </nav>
+<br><br>
+        <div class="w3-container">
 
-        <select>
-            <label for="fullName">Full name:</label>
-            <input type="text" placeholder="Enter full name" name="fullName" required>
+        <h2>REGISTRATION</h2>
 
-            <label for="idNo">ID number:</label>
-            <input type="number" placeholder="ID no." name="idNo" required>
+            <form method="post" action="applicant-insert.php">
+                <label for="fullName">Full name:</label>
+                <input type="text" placeholder="Enter full name" name="fullName" required>
 
-            <label for="hsAddress">Adress:</label>
-            <input type="text" placeholder="address" name="hsAddress" required>
+                <label for="idNo">ID number:</label>
+                <input type="number" placeholder="ID no." name="idNo" required>
 
-            <label for="houseIncome">Household income:</label>
-            <input type="number" placeholder="Income" name="houseIncome" required>
+                <label for="hsAddress">Address:</label>
+                <input type="text" placeholder="Applicant's address" name="hsAddress" required>
 
-            <button type="submit">Register</button>
-        </form>
+                <label for="houseIncome">Household income:</label>
+                <input type="number" placeholder="Income" name="houseIncome" required>
 
-        <button><a href="file-submission.php"></a></button>
-    
+                <button class="regbutton" type="submit">Register</button>
+                <button class="regbutton"><a href="file-sub-page.php">File submission</a></button>
+            </form>
+        </div>
+            
         
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+        <script>
+        // Toggle between showing and hiding the sidebar when clicking the menu icon
+        var mySidebar = document.getElementById("mySidebar");
+        
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+            mySidebar.style.display = 'none';
+            } else {
+            mySidebar.style.display = 'block';
+            }
+        }
+        
+        // Close the sidebar with the close button
+        function w3_close() {
+            mySidebar.style.display = "none";
+        }
+        </script>
     </body>
-    </main>
 </html>

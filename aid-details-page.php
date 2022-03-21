@@ -1,11 +1,12 @@
 <?php
 session_start();
 include 'db-connection.php';
+
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add Appeal</title>
+
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,13 +17,7 @@ include 'db-connection.php';
         <link rel="stylesheet" href="https://unpkg.com/@popperjs/core@2">
         
         <style>
-        body {
-                font-family: 'Open Sans Condensed', sans-serif;
-                font-size: 20px;
-                background-color: #eeeeee;
-            }
-
-            .w3-bar .w3-button {
+        .w3-bar .w3-button {
                 padding: 16px;
             }
 
@@ -37,11 +32,39 @@ include 'db-connection.php';
                 -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
             }
 
-        .dropdown, .addbtn{
-          text-align: center;
-        }
+            .dropdown, .addbtn{
+                text-align: center;
+                }
 
-        .submitbtn{
+            input[type=text], input[type=number], input[type=textarea] {
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                outline: none;
+                display: block;
+                width: 100%;
+                padding: 7px;
+                border: none;
+                border: 2px solid #ddd;
+                margin-bottom: 10px;
+                font: 16px Arial, Helvetica, sans-serif;
+                height: 45px;
+            }
+
+            input[type=textarea]{
+                height: 150px;
+            }
+            input[type=text]:focus, input[type=number]:focus, input[type=textarea]:focus{
+                border: 2px solid #b4b4d8;
+            }
+
+            body {
+                font-family: 'Open Sans Condensed', sans-serif;
+                font-size: 20px;
+                background-color: #eeeeee;
+            }
+
+            .submitbtn{
                 -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
                 -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
                 box-shadow: inset 0px 1px 0px 0px #45D6D6;
@@ -61,10 +84,6 @@ include 'db-connection.php';
                 background-color: #34CACA;
             }
 
-            textarea{
-              vertical-align: top;
-            }
-
             h2 {
                 background: #4D4D4D;
                 text-transform: uppercase;
@@ -74,8 +93,27 @@ include 'db-connection.php';
                 font-weight: 100;
                 padding: 20px;
                 margin: -30px -30px 30px -30px;
-            }     
-            
+            }       
+            table {
+            margin: 50px auto;
+            border:1px solid black;
+            text-align:center;
+            padding:4px;
+            border:none;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+            -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+            -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+            }
+
+            th{
+                background-color: white;
+            }
+
+            textarea{
+              vertical-align: top;
+              width: 100%;
+            }
+
         </style>
     </head>
     <body>
@@ -86,8 +124,8 @@ include 'db-connection.php';
         <a href="rep-home.php" class="w3-bar-item w3-button w3-wide">cityZen</a>
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
-        <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i> ABOUT</a>
-        <a href="logout.php" class="w3-bar-item w3-button"></i> LOG OUT</a>
+        <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i>ABOUT</a>
+        <a href="logout.php" class="w3-bar-item w3-button">LOG OUT</a>
         </div>
 
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -100,24 +138,27 @@ include 'db-connection.php';
     <!-- Sidebar on small screens when clicking the menu icon -->
     <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-        <a href="#manage_org.php" onclick="w3_close()" class="w3-bar-item w3-button">MANAGE ORGANIZATION </a>
-        <a href="#account" onclick="w3_close()" class="w3-bar-item w3-button">ACCOUNT</a>
-        <a href="#log-out" onclick="w3_close()" class="w3-bar-item w3-button">LOG OUT</a>
+        <a href="#manage_org.php" onclick="w3_close()" class="w3-bar-item w3-button">ORGANIZE AID APPEAL </a>
+        <a href="#account" onclick="w3_close()" class="w3-bar-item w3-button">REGISTER APPLICANT</a>
+        <a href="#log-out" onclick="w3_close()" class="w3-bar-item w3-button">RECORD</a>
+        <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">LOG OUT</a>
     </nav>
 
     <br><br>
-    <div class="w3-container" id="add-appeal">
-        <h2 class="w3-center">Record a New Aid Appeal</h2>
-      <form class="appealForm" action="appeal_server.php" method="POST">
-            <label>Start Date:</label>
-            <input type="date" name="start_date" required>
-            <label>End Date:</label>
-            <input type="date" name="end_date" required>
-            <br><br>
-            <label>Description:</label>
-            <textarea name="description" cols="100" rows="8" required></textarea><br><br>
-            <button class="submitbtn" type="submit">Submit</button>
-    </div>
-    </form>
-    </body>
-    </html>
+    <div class="w3-container">
+    <h2>Record Aid Disbursement</h2>
+    <form method="post" action="aid-details.php">
+                <label for="fullName">Disbursement date:</label>
+                <input type="date" name="date" required>
+<br><br>
+                <label for="cash">Cash donated:</label>
+                <input type="number" placeholder="Cash amount" name="cash" required>
+
+                <label for="goods">Goods to be given:</label><br>
+                <textarea name="goods" cols="100" rows="8" required></textarea>
+<br><br>
+                <button class="submitbtn" type="submit">Finish</button>
+            </form>
+        </div>
+</body>
+</html>
